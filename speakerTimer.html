@@ -77,6 +77,7 @@
 
       function countDown(minutes, seconds) {
         var timeString;
+        var darkRedColor = "#AA0000";
 
         minutes = subtractOneMinuteIfTime(minutes, seconds);
         seconds = subtractOneSecond(seconds);
@@ -91,6 +92,8 @@
               countDown(minutes, seconds);
             },
             1000);
+        } else {
+            changeBackgroundColor(darkRedColor);
         }
       }
 
@@ -137,7 +140,7 @@
     <!-- Change the time below to set the timer and then reload
          the web page. Make sure to use MM:SS format. -->
 
-    <h1 id="timeDisplay">01:00</h1>
+    <h1 id="timeDisplay">10:00</h1>
 
     <form>
       <button id="startButton" type="button" value="start" onClick="startTimer()">
