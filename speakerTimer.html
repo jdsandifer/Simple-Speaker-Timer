@@ -5,6 +5,7 @@
   <head>
     <meta charset="utf-8">
     <title>Speaker Timer</title>
+
     <style type="text/css">
       body {
         background: #000;
@@ -25,10 +26,18 @@
         float: left;
       }
     </style>
+
+    <script type="text/javascript">
+      function startTimer() {
+        document.getElementById("timeDisplay")
+                .innerHTML = "09:59";
+      }
+    </script>
   </head>
   <body>
-    <h1>10:00</h1>
+    <h1 id="timeDisplay">10:00</h1>
     <form>
+      <button type="button" value="start" onClick="startTimer()">
         Start
       </button>
     </form>
