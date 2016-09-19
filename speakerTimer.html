@@ -36,31 +36,34 @@
         var initialTimeString;
         var minutes;
         var seconds;
-        var timeString;
+        var warningTime;
+        var green = "#509e2f";
         
-        var darkGreenColor = "#009900";
-        changeBackgroundColor(darkGreenColor);
+        changeBackgroundColor(green);
 
+        // Change "Start" button to "Reset"
         document.getElementById("startButton").innerHTML = "Restart";
         document.getElementById("startButton").onclick = 
-          function(){
-            window.location.reload(false);
-          };
+            function(){
+              window.location.reload(false);
+            };
 
         initialTimeString = getTimerElement().innerHTML;
 
         minutes = extractMinutesNum(initialTimeString);
         seconds = extractSecondsNum(initialTimeString);
+        
+        warningTime = calculateWarningTime(minutes, seconds);
       
         setTimeout(
-          function(){
-            countDown(minutes, seconds);
-          },
-          1000);
+            function(){
+              countDown(minutes, seconds, warningTime);
+            },
+            1000);
       }
       
       function changeBackgroundColor(color) {
-          document.body.style.backgroundColor = color;
+        document.body.style.backgroundColor = color;
       }
 
       function getTimerElement() {
@@ -74,26 +77,47 @@
       function extractSecondsNum(timeString) {
         return 1 * timeString.substring(3,5);
       }
+      
+      function calculateWarningTime(minutes, seconds) {
+        var totalSeconds = convertTimeToSeconds(minutes, seconds);
+        var TWENTY_MIN_IN_SECONDS = 20 * 60;
+        var FIVE_MIN_IN_SECONDS = 5 * 60;
 
-      function countDown(minutes, seconds) {
+        if (totalSeconds >= TWENTY_MIN_IN_SECONDS) {
+            return FIVE_MIN_IN_SECONDS;
+        } else {
+            return Math.round(totalSeconds / 4);
+        }
+      }
+      
+      function convertTimeToSeconds(minutes, seconds) {
+        return (minutes * 60) + seconds;
+      }
+
+      function countDown(minutes, seconds, warningTime) {
         var timeString;
-        var darkRedColor = "#AA0000";
+        var totalSeconds;
+        var red = "#f93822";
+        var yellow = "#eedc00";
 
         minutes = subtractOneMinuteIfTime(minutes, seconds);
         seconds = subtractOneSecond(seconds);
 
         timeString = timeToString(minutes, seconds);
-
         updateTimeDisplay(timeString);
-
-        if (minutes != 0 || seconds != 0) {
+        
+        totalSeconds = convertTimeToSeconds(minutes, seconds);
+        if (totalSeconds > 0) {
+          if (totalSeconds === warningTime) {
+            changeBackgroundColor(yellow);
+          } 
           setTimeout(
-            function(){
-              countDown(minutes, seconds);
-            },
-            1000);
+              function(){
+                countDown(minutes, seconds, warningTime);
+              },
+              1000);
         } else {
-            changeBackgroundColor(darkRedColor);
+            changeBackgroundColor(red);
         }
       }
 
