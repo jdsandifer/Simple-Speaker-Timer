@@ -35,6 +35,12 @@
         var seconds;
         var timeString;
 
+        document.getElementById("startButton").innerHTML = "Restart";
+        document.getElementById("startButton").onclick = 
+          function(){
+            window.location.reload(false);
+          };
+
         initialTimeString = getTimerElement().innerHTML;
 
         minutes = extractMinutesNum(initialTimeString);
@@ -45,6 +51,18 @@
             countDown(minutes, seconds);
           },
           1000);
+      }
+
+      function getTimerElement() {
+        return document.getElementById("timeDisplay");
+      }
+
+      function extractMinutesNum(timeString) {
+        return 1 * timeString.substring(0,2);
+      }
+
+      function extractSecondsNum(timeString) {
+        return 1 * timeString.substring(3,5);
       }
 
       function countDown(minutes, seconds) {
@@ -65,20 +83,6 @@
             1000);
         }
       }
-
-      function getTimerElement() {
-        return document.getElementById("timeDisplay");
-      }
-
-      function extractMinutesNum(timeString) {
-        return 1 * timeString.substring(0,2);
-      }
-
-      function extractSecondsNum(timeString) {
-        return 1 * timeString.substring(3,5);
-      }
-
-
 
       function subtractOneMinuteIfTime(minutes, seconds) {
         return (seconds === 0) ? minutes - 1: minutes;
@@ -123,10 +127,10 @@
     <!-- Change the time below to set the timer and then reload
          the web page. Make sure to use MM:SS format. -->
 
-    <h1 id="timeDisplay">00:30</h1>
+    <h1 id="timeDisplay">01:00</h1>
 
     <form>
-      <button type="button" value="start" onClick="startTimer()">
+      <button id="startButton" type="button" value="start" onClick="startTimer()">
         Start
       </button>
     </form>
