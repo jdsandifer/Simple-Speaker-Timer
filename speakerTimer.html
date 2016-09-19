@@ -10,8 +10,16 @@
     <title>Speaker Timer</title>
 
     <style type="text/css">
+      html {
+        height: 100%;
+      }
       body {
+        height: 100%;
         background: #000;
+        -webkit-transition: background 4s linear;
+        -moz-transition: background 4s linear;
+        -o-transition: background 4s linear;
+        transition: background 4s linear;
         color: #ccc;
         font-size: 300px;
         font-family: helvetica, arial, sans-serif;
@@ -19,27 +27,39 @@
       }
 
       h1 {
-        -webkit-margin-before: 0em;
-        -webkit-margin-after: 0em;
+        margin-top: 0px;
+        margin-bottom: 0px;
       }
 
       button {
         border-radius: 12px;
         font-size: 0.125em;
         float: left;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding: 5px;
+      }
+
+      @-webkit-keyframes blink {
+        0%, 100% { opacity: 1.0; }
+        50% { opacity: 0.0; }
       }
       
-      @-webkit-keyframes blink {
-        0% { 
-          opacity: 1.0;
-        }
-        50% { 
-          opacity: 0.0;
-        }
-        100% {
-          opacity: 1.0;
-        }
+      @-moz-keyframes blink {
+        0%, 100% { opacity: 1.0; }
+        50% { opacity: 0.0; }
       }
+      
+      @-o-keyframes blink {
+        0%, 100% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+      }
+      
+      @keyframes blink {
+        0%, 100% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+      }
+
       blink {
         -webkit-animation-name: blink;
         -webkit-animation-iteration-count: 4;
@@ -56,7 +76,7 @@
         var seconds;
         var warningTime;
         var green = "#509e2f";
-        
+
         changeBackgroundColor(green);
 
         // Change "Start" button to "Reset"
@@ -126,16 +146,17 @@
         
         totalSeconds = convertTimeToSeconds(minutes, seconds);
         if (totalSeconds > 0) {
-          if (totalSeconds === warningTime) {
+          if (totalSeconds === warningTime + 3) {
             changeBackgroundColor(yellow);
-          } 
+          } else if (totalSeconds === 3) {
+            changeBackgroundColor(red);
+          }
           setTimeout(
               function(){
                 countDown(minutes, seconds, warningTime);
               },
               1000);
         } else {
-            changeBackgroundColor(red);
             updateTimeDisplay("<blink>00:00</blink>");
         }
       }
@@ -183,7 +204,7 @@
     <!-- Change the time below to set the timer and then reload
          the web page. Make sure to use MM:SS format. -->
 
-    <h1 id="timeDisplay">00:03</h1>
+    <h1 id="timeDisplay">10:00</h1>
 
     <form>
       <button id="startButton" type="button" value="start" onClick="startTimer()">
