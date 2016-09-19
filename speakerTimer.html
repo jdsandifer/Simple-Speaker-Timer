@@ -1,0 +1,45 @@
+<!--Copyright 2016 J.D. Sandifer-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Speaker Timer</title>
+
+    <style type="text/css">
+      body {
+        background: #000;
+        color: #ccc;
+        font-size: 300px;
+        font-family: helvetica, arial, sans-serif;
+        text-align: center;
+      }
+
+      h1 {
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 0em;
+      }
+
+      button {
+        border-radius: 12px;
+        font-size: 0.125em;
+        float: left;
+      }
+    </style>
+
+    <script type="text/javascript">
+      function startTimer() {
+        document.getElementById("timeDisplay")
+                .innerHTML = "09:59";
+      }
+    </script>
+  </head>
+  <body>
+    <h1 id="timeDisplay">10:00</h1>
+    <form>
+      <button type="button" value="start" onClick="startTimer()">
+        Start
+      </button>
+    </form>
+  </body>
+</html>
