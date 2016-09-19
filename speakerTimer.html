@@ -28,14 +28,103 @@
     </style>
 
     <script type="text/javascript">
+
       function startTimer() {
-        document.getElementById("timeDisplay")
-                .innerHTML = "09:59";
+        var initialTimeString;
+        var minutes;
+        var seconds;
+        var timeString;
+
+        initialTimeString = getTimerElement().innerHTML;
+
+        minutes = extractMinutesNum(initialTimeString);
+        seconds = extractSecondsNum(initialTimeString);
+      
+        setTimeout(
+          function(){
+            countDown(minutes, seconds);
+          },
+          1000);
       }
+
+      function countDown(minutes, seconds) {
+        var timeString;
+
+        minutes = subtractOneMinuteIfTime(minutes, seconds);
+        seconds = subtractOneSecond(seconds);
+
+        timeString = timeToString(minutes, seconds);
+
+        updateTimeDisplay(timeString);
+
+        if (minutes != 0 || seconds != 0) {
+          setTimeout(
+            function(){
+              countDown(minutes, seconds);
+            },
+            1000);
+        }
+      }
+
+      function getTimerElement() {
+        return document.getElementById("timeDisplay");
+      }
+
+      function extractMinutesNum(timeString) {
+        return 1 * timeString.substring(0,2);
+      }
+
+      function extractSecondsNum(timeString) {
+        return 1 * timeString.substring(3,5);
+      }
+
+
+
+      function subtractOneMinuteIfTime(minutes, seconds) {
+        return (seconds === 0) ? minutes - 1: minutes;
+      }
+
+      function subtractOneSecond(seconds) {
+        return (seconds === 0) ? 59:seconds - 1;
+      }
+
+      /*
+       * Expects minutes and seconds to be 1 or 2 digit natural numbers.
+       */
+      function timeToString(minutes, seconds) {
+        var minString;
+        var secString;
+        
+        minString = timePartToString(minutes);
+        secString = timePartToString(seconds);
+
+        return minString + ':' + secString;
+      }
+
+      /*
+       * Expects 1 or 2 digit natural number for timePartNum.
+       */
+      function timePartToString(timePartNum) {
+  	if (timePartNum <= 9) {
+          return '0' + timePartNum;
+        } else {
+          return timePartNum.toString();
+        }
+      }
+
+      function updateTimeDisplay(timeString) {
+	getTimerElement().innerHTML = timeString;
+      }
+
     </script>
   </head>
   <body>
-    <h1 id="timeDisplay">10:00</h1>
+
+    <!-- Change the time below to set the timer and then reload
+         the web page. Make sure to use MM:SS format. -->
+
+    <h1 id="timeDisplay">00:30</h1>
+
     <form>
       <button type="button" value="start" onClick="startTimer()">
         Start
