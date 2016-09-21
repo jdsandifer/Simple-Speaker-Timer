@@ -5,39 +5,57 @@
      Full license for this project is found in the "LICENSE" file located in 
      the same directory as this file. -->
 
-<head>
+  <head>
     <meta charset="utf-8">
     <title>Speaker Timer</title>
 
     <style type="text/css">
-      html {
-        height: 100%;
-      }
       body {
-        height: 100%;
         background: #000;
         -webkit-transition: background 4s linear;
         -moz-transition: background 4s linear;
-        -o-transition: background 4s linear;
         transition: background 4s linear;
-        color: #ccc;
-        font-size: 300px;
-        font-family: helvetica, arial, sans-serif;
-        text-align: center;
+        font-size: 300px; font-size: 18vw;
       }
 
       h1 {
         margin-top: 0px;
         margin-bottom: 0px;
+        font-family: arial, sans-serif;
+        color: #ddd;
+        text-align: center;
+        text-shadow:
+          0px 1px 0 #bbb,
+          0px 2px 0 #aaa,
+          0px 3px 0 #999,
+          0px 6px 30px #222;
       }
 
       button {
-        border-radius: 12px;
-        font-size: 0.125em;
         float: left;
-        margin-top: 0px;
-        margin-bottom: 0px;
+        margin: 0 0 0 1vw;
+        width: 100px;
+        background: #000; background: rgba(128,128,128,0);
+        border: solid 3px #ddd;
+        border-radius: 6px;
+        box-shadow:
+          inset 0px 4px 12px rgba(0,0,0,.5),
+          0px 1px 0 #bbb,
+          0px 2px 0 #aaa,
+          0px 4px 12px #222;
+        
         padding: 5px;
+        text-align: center;
+        font-size: 0.125em;
+        color: #ddd;
+        text-shadow: 
+          0px 4px 6px #222;
+      }
+
+      blink {
+        -webkit-animation: blink 2s cubic-bezier(1.0, 0, 0, 1.0) 4;
+        -moz-animation: blink 2s cubic-bezier(1.0, 0, 0, 1.0) 4;
+        animation: blink 2s cubic-bezier(1.0, 0, 0, 1.0) 4;
       }
 
       @-webkit-keyframes blink {
@@ -50,21 +68,9 @@
         50% { opacity: 0.0; }
       }
       
-      @-o-keyframes blink {
-        0%, 100% { opacity: 1.0; }
-        50% { opacity: 0.0; }
-      }
-      
       @keyframes blink {
         0%, 100% { opacity: 1.0; }
         50% { opacity: 0.0; }
-      }
-
-      blink {
-        -webkit-animation-name: blink;
-        -webkit-animation-iteration-count: 4;
-        -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
-        -webkit-animation-duration: 2s;
       }
     </style>
 
@@ -75,7 +81,7 @@
         var minutes;
         var seconds;
         var warningTime;
-        var green = "#509e2f";
+        var green = "#307c0d";
 
         changeBackgroundColor(green);
 
@@ -134,9 +140,9 @@
 
       function countDown(minutes, seconds, warningTime) {
         var timeString;
-        var totalSeconds;
-        var red = "#f93822";
-        var yellow = "#eedc00";
+        var totalSeconds;        
+        var yellow = "#bba900";
+        var red = "#d71411";
 
         minutes = subtractOneMinuteIfTime(minutes, seconds);
         seconds = subtractOneSecond(seconds);
@@ -148,7 +154,7 @@
         if (totalSeconds > 0) {
           if (totalSeconds === warningTime + 3) {
             changeBackgroundColor(yellow);
-          } else if (totalSeconds === 3) {
+          } else if (totalSeconds <= 3) {
             changeBackgroundColor(red);
           }
           setTimeout(
@@ -204,7 +210,7 @@
     <!-- Change the time below to set the timer and then reload
          the web page. Make sure to use MM:SS format. -->
 
-    <h1 id="timeDisplay">10:00</h1>
+    <h1 id="timeDisplay">00:25</h1>
 
     <form>
       <button id="startButton" type="button" value="start" onClick="startTimer()">
