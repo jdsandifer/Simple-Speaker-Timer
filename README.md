@@ -10,7 +10,7 @@ To use the file (`speakerTimer.html`), open it in any web browser, maximize the 
 ---
 
 ### Compiling / Combining
-Since each release should result in *one* `speakerTimer.html` file AND it's easier to work on and test if the JavaScript, CSS, and HTML code are in separate files, it's important to combine them into one file for each release. Currently that is a manual process, but I'm interested in making that an automated task. (Please make a suggestion
+Since each release should result in *one* `speakerTimer.html` file AND it's easier to work on and test if the JavaScript, CSS, and HTML code are in separate files, it's important to combine them into one file for each release. Currently that is a manual process, but I'm interested in making that an automated task. (Please let me know if you have a good suggestion for that.)
 
 ### Unit Testing
 Simply open the `index.html` file in the `/test` folder to see the unit tests. Refresh the page after changes to either the `speakerTimer.js` file in the `/src` folder or `tests.js` in the `/test` folder to update the tests.
