@@ -14,3 +14,9 @@ Since each release should result in *one* `speakerTimer.html` file AND it's easi
 
 ### Unit Testing
 Simply open the `index.html` file in the `/test` folder to see the unit tests. Refresh the page after changes to either the `speakerTimer.js` file in the `/src` folder or `tests.js` in the `/test` folder to update the tests.
+
+### Code
+- [ JavaScript ](https://github.com/jdsandifer/SimpleSpeakerTimer/blob/master/src/speakerTimer.js)
+- [ Unit Tests (QUnit) ](https://github.com/jdsandifer/SimpleSpeakerTimer/blob/master/test/tests.js)
+- [ CSS ](https://github.com/jdsandifer/SimpleSpeakerTimer/blob/master/src/speakerTimer.css)
+- [ HTML ](https://github.com/jdsandifer/SimpleSpeakerTimer/blob/master/src/speakerTimer.html)
